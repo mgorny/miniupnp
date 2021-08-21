@@ -99,8 +99,8 @@ HEADERS = $(wildcard $(INCDIR)/*.h)
 # library names
 LIBRARY = $(BUILD)/libminiupnpc.a
 ifneq (, $(findstring darwin, $(OS)))
-  SHAREDLIBRARY = libminiupnpc.dylib
-  SONAME = $(basename $(SHAREDLIBRARY)).$(APIVERSION).dylib
+  SHAREDLIBRARY = $(BUILD)/libminiupnpc.dylib
+  SONAME = $(notdir $(basename $(SHAREDLIBRARY))).$(APIVERSION).dylib
   CPPFLAGS += -D_DARWIN_C_SOURCE
 else
 ifeq ($(JARSUFFIX), win32)
@@ -108,7 +108,7 @@ ifeq ($(JARSUFFIX), win32)
 else
   # Linux/BSD/etc.
   SHAREDLIBRARY = $(BUILD)/libminiupnpc.so
-  SONAME = $(SHAREDLIBRARY).$(APIVERSION)
+  SONAME = $(notdir $(SHAREDLIBRARY)).$(APIVERSION)
 endif
 endif
 
